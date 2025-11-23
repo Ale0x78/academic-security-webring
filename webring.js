@@ -74,7 +74,6 @@ function displayError(message) {
 function displayWebring() {
     const member = members[currentIndex];
     document.getElementById('site-name').textContent = member.name;
-    document.getElementById('site-owner').textContent = `Owner: ${member.owner}`;
 }
 
 // Navigation functions
@@ -110,11 +109,6 @@ function random() {
         randomIndex = Math.floor(Math.random() * members.length);
     } while (randomIndex === currentIndex && members.length > 1);
     navigate(randomIndex);
-}
-
-function listSites() {
-    // Navigate to a list page (we'll create this)
-    window.top.location.href = window.location.origin + window.location.pathname.replace('index.html', '') + 'list.html';
 }
 
 // Initialize when DOM is ready
