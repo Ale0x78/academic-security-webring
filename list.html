@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Security Webring - Member List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border: 3px double #000000;
+        }
+
+        h1 {
+            text-align: center;
+            color: #000000;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .member-list {
+            list-style: none;
+        }
+
+        .member-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 2px solid #000000;
+            background-color: #e0e0e0;
+        }
+
+        .member-item:hover {
+            background-color: #d0d0d0;
+        }
+
+        .member-name {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .member-name a {
+            color: #0000ee;
+            text-decoration: underline;
+        }
+
+        .member-name a:visited {
+            color: #551a8b;
+        }
+
+        .member-name a:hover {
+            color: #ee0000;
+        }
+
+        .member-owner {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .stats {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #fffacd;
+            border: 2px solid #000000;
+            font-weight: bold;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #0000ee;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Academic Security Webring 🔒</h1>
+        <div class="subtitle">Member Directory</div>
+
+        <ul class="member-list" id="member-list">
+            <li>Loading members...</li>
+        </ul>
+
+        <div class="stats" id="stats">
+            Total members: <span id="member-count">0</span>
+        </div>
+
+        <div class="back-link">
+            <a href="index.html">← Back to Webring</a>
+        </div>
+    </div>
+
+    <script>
+        async function loadMembers() {
+            try {
+                const response = await fetch('members.json');
+                const data = await response.json();
+                const members = data.members || data;
+
+                const listElement = document.getElementById('member-list');
+                listElement.innerHTML = '';
+
+                members.forEach((member, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'member-item';
+                    li.innerHTML = `
+                        <div class="member-name">
+                            <a href="${member.url}" target="_blank">${member.name}</a>
+                        </div>
+                        <div class="member-owner">Owned by: ${member.owner}</div>
+                    `;
+                    listElement.appendChild(li);
+                });
+
+                document.getElementById('member-count').textContent = members.length;
+            } catch (error) {
+                document.getElementById('member-list').innerHTML =
+                    '<li style="color: red;">Failed to load members: ' + error.message + '</li>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadMembers);
+    </script>
+</body>
+</html>

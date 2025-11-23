@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Security Webring</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="webring-container">
+        <div class="webring-header">
+            <div class="webring-title">
+                This <a href="https://github.com/USERNAME/REPO/edit/main/members.json" target="_top" class="webring-link">Academic Security Webring</a> site is owned by<br>
+                <span id="site-owner">Your Name Here</span>.
+            </div>
+        </div>
+
+        <div class="webring-info">
+            <div id="site-name">Loading...</div>
+        </div>
+
+        <div class="webring-nav">
+            [<a href="#" onclick="skipPrev(); return false;">Skip Prev</a>]
+            [<a href="#" onclick="prev(); return false;">Prev</a>]
+            [<a href="#" onclick="next(); return false;">Next</a>]
+            [<a href="#" onclick="skipNext(); return false;">Skip Next</a>]
+            [<a href="#" onclick="random(); return false;">Random</a>]
+            [<a href="#" onclick="listSites(); return false;">List Sites</a>]
+        </div>
+    </div>
+
+    <script src="webring.js"></script>
+</body>
+</html>
