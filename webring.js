@@ -2,8 +2,20 @@ let members = [];
 let currentSite = null;
 let currentIndex = -1;
 
-// Get the site parameter from URL
+// Get the site from referrer or URL parameter
 function getCurrentSiteFromURL() {
+    // First, try to detect from the parent page (referrer)
+    if (document.referrer) {
+        try {
+            const referrerURL = new URL(document.referrer);
+            // Return the origin + pathname (without query params or hash)
+            return referrerURL.origin + referrerURL.pathname.replace(/\/$/, '');
+        } catch (e) {
+            console.warn('Failed to parse referrer:', e);
+        }
+    }
+
+    // Fall back to explicit site parameter
     const params = new URLSearchParams(window.location.search);
     return params.get('site');
 }
@@ -30,7 +42,7 @@ async function init() {
         currentSite = getCurrentSiteFromURL();
 
         if (!currentSite) {
-            displayError('No site specified. Add ?site=YOUR_URL to the iframe src.');
+            displayError('Could not detect site. Make sure the iframe is embedded on your page, or add ?site=YOUR_URL to the iframe src.');
             return;
         }
 
