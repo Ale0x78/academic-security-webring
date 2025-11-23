@@ -18,6 +18,24 @@ body {
     border: 3px double #000000;
     background-color: #ffffff;
     text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.webring-icon {
+    flex-shrink: 0;
+}
+
+.webring-icon img {
+    width: 80px;
+    height: 80px;
+    display: block;
+}
+
+.webring-content {
+    flex: 1;
+    min-width: 0;
 }
 
 .webring-header {

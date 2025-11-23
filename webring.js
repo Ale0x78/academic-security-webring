@@ -54,7 +54,7 @@ async function init() {
 
         if (currentIndex === -1) {
             const editUrl = 'https://github.com/zardus/academic-security-webring/edit/main/members.json';
-            displayError(`Site not found. <a href="${editUrl}" target="_top">Add yourself here!</a>`);
+            displayError(`Site not found. <a href="${editUrl}" target="_blank">Add it here!</a>`);
             return;
         }
 
@@ -80,7 +80,7 @@ function displayWebring() {
 function navigate(targetIndex) {
     if (targetIndex < 0 || targetIndex >= members.length) return;
     const targetURL = members[targetIndex].url;
-    window.top.location.href = targetURL;
+    window.open(targetURL, '_blank');
 }
 
 function prev() {
