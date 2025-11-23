@@ -9,7 +9,8 @@ function getCurrentSiteFromURL() {
         try {
             const referrerURL = new URL(document.referrer);
             // Return the origin + pathname (without query params or hash)
-            return referrerURL.origin + referrerURL.pathname.replace(/\/$/, '');
+            // Normalization will handle protocol and trailing slashes
+            return referrerURL.origin + referrerURL.pathname;
         } catch (e) {
             console.warn('Failed to parse referrer:', e);
         }
@@ -25,10 +26,10 @@ function normalizeURL(url) {
     if (!url) return '';
     try {
         const urlObj = new URL(url);
-        // Remove trailing slash and convert to lowercase
-        return urlObj.href.replace(/\/$/, '').toLowerCase();
+        // Remove protocol, trailing slash and convert to lowercase
+        return urlObj.href.replace(/^https?:\/\//, '').replace(/\/$/, '').toLowerCase();
     } catch {
-        return url.replace(/\/$/, '').toLowerCase();
+        return url.replace(/^https?:\/\//, '').replace(/\/$/, '').toLowerCase();
     }
 }
 
